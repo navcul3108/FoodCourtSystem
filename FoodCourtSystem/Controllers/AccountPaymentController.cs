@@ -1,6 +1,7 @@
 ﻿using FoodCourtSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,24 +14,61 @@ namespace FoodCourtSystem.Controllers
         FundDbContext db = new FundDbContext();
         
         // GET: AccountPayment
-        public ActionResult ViewFund(string accountName)
+        public ActionResult ViewFund(string userName)
         {
-            if (accountName == null)
+            if (userName == null)
                 return View("Error");
-            var f = db.accountFunds.Where(fund => fund.AccountName == accountName).SingleOrDefault();
-            if(f==null)
+            if(db.accountFunds.Count()==0)
             {
-                f = new AccountFundModel
+                AccountFundModel new_fund = new AccountFundModel
                 {
                     ID = "",
-                    AccountName = accountName,
+                    AccountName = userName,
                     Balance = 0
                 };
-                db.Add(f);
+                db.Add(new_fund);
+                return View(new_fund);
             }
-            return View(f);
+            else
+            {
+                var f = db.accountFunds.Where(fund => fund.AccountName == userName).SingleOrDefault();
+                if (f == null)
+                {
+                    f = new AccountFundModel
+                    {
+                        ID = "",
+                        AccountName = userName,
+                        Balance = 0
+                    };
+                    db.Add(f);
+                }
+                return View(f);
+            }   
         }
 
+        public ActionResult ChargeAccount()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChargeAccount(AccountFundModel model, int amount)
+        {
+            if (amount > 0)
+            {
+                var f = db.accountFunds.Where(fund => fund.AccountName == userName).SingleOrDefault();
+                if (f == null)
+                {
+                    return View("Error");
+                }
+                f.Balance = f.Balance + amount;
+                db.accountFunds.AddOrUpdate(f);
+                db.SaveChanges();
+                return RedirectToAction("ViewFund", "AccountPayment");
+            }
+            else
+                return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

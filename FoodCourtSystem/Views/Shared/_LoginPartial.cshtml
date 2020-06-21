@@ -10,7 +10,7 @@
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li>
-            @Html.ActionLink("View Fund", "ViewFund", "AccountPayment", routeValues: User.Identity.GetUserName(), htmlAttributes: new { })
+            @Html.ActionLink("View Fund", "ViewFund", "AccountPayment", routeValues: new { userName = User.Identity.GetUserName() }, htmlAttributes: null)
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

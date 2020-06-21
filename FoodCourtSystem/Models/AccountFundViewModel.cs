@@ -15,8 +15,7 @@ namespace FoodCourtSystem.Models
 
     public class FundDbContext : DbContext 
     {
-        public DbSet<AccountFundModel> accountFunds;
-        public static Guid guid = new Guid();
+        public DbSet<AccountFundModel> accountFunds { get; set; }
         public void Add(AccountFundModel item)
         {
             string id = DateTime.Now.Ticks.ToString();
