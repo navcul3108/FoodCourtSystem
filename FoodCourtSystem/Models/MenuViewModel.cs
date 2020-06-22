@@ -17,7 +17,7 @@ namespace FoodCourtSystem.Models
     }
     public class ProductDbContext: DbContext
     {
-        public ProductDbContext()
+        public ProductDbContext():base("ProductContext")
         {
 
         }

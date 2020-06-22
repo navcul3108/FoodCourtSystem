@@ -1,13 +1,18 @@
 ﻿@model FoodCourtSystem.Models.AccountFundModel
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "ViewFund";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewFund</h2>
-<div class="row">
-    <div class="col-md-6">Số dư trong tài khoản:</div>
-    <div class="col-md-3 pull-right">@Model.Balance</div>
-    <div class="col-md-3 pull-right"><a class="btn btn-default">Nạp tiền</a></div>
-</div>
+@if (Request.IsAuthenticated)
+{
+    
+    <h2>ViewFund</h2>
+    <div class="row">
+        <div class="col-md-6">Số dư trong tài khoản: @Model.UserName</div>
+        <div class="col-md-3 ">@Model.Balance</div>
+        <div class="col-md-3 pull-right"><a class="btn btn-default" href="@Url.Action("ChargeAccount", "AccountPayment", new { userName = Model.UserName})">Nạp tiền</a></div>
+    </div>
+}
+

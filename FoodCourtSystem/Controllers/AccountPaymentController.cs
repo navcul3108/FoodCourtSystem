@@ -9,6 +9,7 @@ using System.Web.Razor.Parser;
 
 namespace FoodCourtSystem.Controllers
 {
+    [Authorize]
     public class AccountPaymentController : Controller
     {
         FundDbContext db = new FundDbContext();
@@ -18,56 +19,42 @@ namespace FoodCourtSystem.Controllers
         {
             if (userName == null)
                 return View("Error");
-            if(db.accountFunds.Count()==0)
+            var f = db.accountFunds.Where(fund => fund.UserName == userName).SingleOrDefault();
+            if (f == null)
             {
-                AccountFundModel new_fund = new AccountFundModel
+                f = new AccountFundModel
                 {
-                    ID = "",
-                    AccountName = userName,
+                    ID = DateTime.Now.Ticks.ToString(),
+                    UserName = userName,
                     Balance = 0
                 };
-                db.Add(new_fund);
-                return View(new_fund);
+                db.accountFunds.Add(f);
+                db.SaveChanges();
             }
-            else
-            {
-                var f = db.accountFunds.Where(fund => fund.AccountName == userName).SingleOrDefault();
-                if (f == null)
-                {
-                    f = new AccountFundModel
-                    {
-                        ID = "",
-                        AccountName = userName,
-                        Balance = 0
-                    };
-                    db.Add(f);
-                }
-                return View(f);
-            }   
+            return View(f);
         }
 
-        public ActionResult ChargeAccount()
+        public ActionResult ChargeAccount(string userName)
         {
+            ViewBag.UserName = userName;
             return View();
         }
 
         [HttpPost]
-        public ActionResult ChargeAccount(AccountFundModel model, int amount)
+        public ActionResult ChargeAccount(ChargeAccountViewModel model)
         {
-            if (amount > 0)
-            {
-                var f = db.accountFunds.Where(fund => fund.AccountName == userName).SingleOrDefault();
-                if (f == null)
-                {
-                    return View("Error");
-                }
-                f.Balance = f.Balance + amount;
-                db.accountFunds.AddOrUpdate(f);
-                db.SaveChanges();
-                return RedirectToAction("ViewFund", "AccountPayment");
-            }
-            else
+            if(!ModelState.IsValid)
                 return View();
+            else
+            {
+                var fund = db.accountFunds.Where(f => f.UserName == model.UserName).SingleOrDefault();
+                if (fund == null)
+                    return View("Error");
+                fund.Balance += model.Amount;
+                db.accountFunds.AddOrUpdate(fund);
+                db.SaveChanges();
+                return RedirectToAction("ViewFund", "AccountPayment",new { userName = model.UserName });
+            }
         }
         protected override void Dispose(bool disposing)
         {

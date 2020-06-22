@@ -1,16 +1,36 @@
-﻿@model FoodCourtSystem.Models.AccountFundModel
-
+﻿@model FoodCourtSystem.Models.ChargeAccountViewModel
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "ChargeAccount";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>ChargeAccount</h2>
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@if (Request.IsAuthenticated)
 {
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        <p>Số tiền cần nạp</p>
-        @Html.TextBoxFor()
+    <h2>ChargeAccount</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("ChargeAccount", "AccountPayment", new {  }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <h4>Nạp tiền cho tài khoản @User.Identity.GetUserName()</h4>
+                    @Html.Hidden("UserName", User.Identity.GetUserName())
+                    <div class="form-group">
+                        <p class="col-md-4">Số tiền</p>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Nạp tiền" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
     </div>
 }
