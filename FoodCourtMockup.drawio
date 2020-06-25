@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-06-25T14:41:37.440Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36" etag="wimpu_uwykEma-5k1T7M" version="13.3.4" type="github" pages="7">
+<mxfile host="app.diagrams.net" modified="2020-06-25T14:46:39.986Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36" etag="Gst9N17tqKAJQ072_5C4" version="13.3.4" type="github" pages="8">
   <diagram name="Trang chủ" id="c9db0220-8083-56f3-ca83-edcdcd058819">
     <mxGraphModel dx="1736" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="826" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
@@ -833,7 +833,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="UZ-C_jF0zuBa-LBbXalh" name="Chủ quầy">
-    <mxGraphModel dx="2251" dy="1813" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2844" dy="2081" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="3NwoNhizFqMeTxZ8PMxp-0" />
         <mxCell id="3NwoNhizFqMeTxZ8PMxp-1" parent="3NwoNhizFqMeTxZ8PMxp-0" />
@@ -867,7 +867,7 @@
         <mxCell id="wnf6z5Cd4DWbkvzdXBnH-33" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=30;" edge="1" parent="3NwoNhizFqMeTxZ8PMxp-1" source="-2gAzULBy_fG-XWwiVxz-3" target="-2gAzULBy_fG-XWwiVxz-13">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="-2gAzULBy_fG-XWwiVxz-3" value="&lt;font style=&quot;font-size: 22px&quot;&gt;Xem thống kế&lt;/font&gt;" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#33A64C;fontColor=#FFFFFF;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="3NwoNhizFqMeTxZ8PMxp-1">
+        <mxCell id="-2gAzULBy_fG-XWwiVxz-3" value="&lt;font style=&quot;font-size: 22px&quot;&gt;Xem thống kê&lt;/font&gt;" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=none;strokeWidth=1;fillColor=#33A64C;fontColor=#FFFFFF;whiteSpace=wrap;align=center;verticalAlign=middle;spacingLeft=0;fontStyle=0;fontSize=16;spacing=5;" vertex="1" parent="3NwoNhizFqMeTxZ8PMxp-1">
           <mxGeometry x="700" y="490" width="170" height="70" as="geometry" />
         </mxCell>
         <mxCell id="-2gAzULBy_fG-XWwiVxz-4" value="" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rect;fillColor=#222222;strokeColor=none;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#000000;align=center;" vertex="1" parent="3NwoNhizFqMeTxZ8PMxp-1">
@@ -1010,6 +1010,20 @@
         <mxCell id="wnf6z5Cd4DWbkvzdXBnH-38" value="Doanh thu theo loại&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=30;" vertex="1" parent="3NwoNhizFqMeTxZ8PMxp-1">
           <mxGeometry x="1155" y="1240" width="420" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="wnf6z5Cd4DWbkvzdXBnH-39" value="Theo tháng" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=30;fillColor=#FFFFFF;" vertex="1" parent="3NwoNhizFqMeTxZ8PMxp-1">
+          <mxGeometry x="1530" y="949" width="186" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="wnf6z5Cd4DWbkvzdXBnH-40" value="Cập nhật từng ngày" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fontSize=30;fillColor=#FFFFFF;" vertex="1" parent="3NwoNhizFqMeTxZ8PMxp-1">
+          <mxGeometry x="464" y="960" width="186" height="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="9LFTXgaKMbFTShIUQzdU" name="Page-8">
+    <mxGraphModel dx="1210" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="j7GlhCrJHkMDFGNAQFIa-0" />
+        <mxCell id="j7GlhCrJHkMDFGNAQFIa-1" parent="j7GlhCrJHkMDFGNAQFIa-0" />
       </root>
     </mxGraphModel>
   </diagram>
