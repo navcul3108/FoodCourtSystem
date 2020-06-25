@@ -1,0 +1,70 @@
+﻿@model FoodCourt.Models.Product
+@using System.Web.UI.WebControls;
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nameProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nameProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imagePath)
+        </dt>
+
+        <dd>
+            @{string fileName = Model.imagePath;
+
+            <img src="@Url.Content(fileName)" width:"150px" height:"150px"/>
+
+                }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vendorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vendorName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
