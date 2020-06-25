@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Parser;
+using System.Threading.Tasks;
 
 namespace FoodCourtSystem.Controllers
 {
@@ -15,7 +16,7 @@ namespace FoodCourtSystem.Controllers
         FundDbContext db = new FundDbContext();
         
         // GET: AccountPayment
-        public ActionResult ViewFund(string userName)
+        public async Task<ActionResult> ViewFund(string userName)
         {
             if (userName == null)
                 return View("Error");

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
+
 namespace FoodCourtSystem.Models
 {
     public class AccountFundModel
@@ -27,6 +28,8 @@ namespace FoodCourtSystem.Models
         public FundDbContext():base("FundContext")
         { }
         public DbSet<AccountFundModel> accountFunds { get; set; }
+
+        public System.Data.Entity.DbSet<FoodCourtSystem.Models.PaymentRequestModel> PaymentRequestModels { get; set; }
     }
 
 }
