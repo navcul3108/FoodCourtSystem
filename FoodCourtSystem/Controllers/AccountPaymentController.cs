@@ -13,7 +13,7 @@ namespace FoodCourtSystem.Controllers
     [Authorize]
     public class AccountPaymentController : Controller
     {
-        FundDbContext db = new FundDbContext();
+        AccountFundContext db = new AccountFundContext();
         
         // GET: AccountPayment
         public async Task<ActionResult> ViewFund(string userName)

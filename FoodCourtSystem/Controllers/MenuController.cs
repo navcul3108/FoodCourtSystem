@@ -9,15 +9,12 @@ namespace FoodCourtSystem.Controllers
 {
     public class MenuController : Controller
     {
-        FoodCourtSystem.Models.ProductDbContext db = new Models.ProductDbContext();
+        FoodCourtSystem.Models.ProductContext db = new Models.ProductContext();
         public MenuController() { }
         // GET: Menu
         public ActionResult Index()
         {
-            var products = from p in db.Products
-                           orderby p.ID
-                           select p;
-            return View(products);
+            return View(db.Products.ToList());
         }
         
         //
@@ -28,7 +25,7 @@ namespace FoodCourtSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include ="Name,Price,ImageName")] Product p)
+        public ActionResult Create([Bind(Include ="Name,Price,ImageName")] ProductModel p)
         {
             if(ModelState.IsValid)
             {

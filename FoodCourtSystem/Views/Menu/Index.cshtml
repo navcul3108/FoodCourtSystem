@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FoodCourtSystem.Models.Product>
+﻿@model IEnumerable<FoodCourtSystem.Models.ProductModel>
 
 @{
     ViewBag.Title = "Index";
@@ -23,7 +23,7 @@
                     <h4 class="group card-title inner list-group-item-heading">@Html.DisplayFor(modelItem => item.Name)</h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <p class="lead">@Html.DisplayFor(modelItem => item.Price)</p>
+                            <p class="lead">@Html.DisplayFor(modelItem => item.UnitPrice)</p>
                         </div>
                     </div>
                     <div class="row">

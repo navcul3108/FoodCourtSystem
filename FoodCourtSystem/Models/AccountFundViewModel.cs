@@ -23,9 +23,9 @@ namespace FoodCourtSystem.Models
         public int Amount { get; set; }
     }
 
-    public class FundDbContext : DbContext 
+    public class AccountFundContext : DbContext 
     {
-        public FundDbContext():base("FundContext")
+        public AccountFundContext():base("AccountFundContext")
         { }
         public DbSet<AccountFundModel> accountFunds { get; set; }
 
