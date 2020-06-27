@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "NotPermissionToAccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="danger text-center">Bạn không được phép truy cập trang này</h1>
+@Html.ActionLink("Trở về","Index","Home", new { @color= "blue"})

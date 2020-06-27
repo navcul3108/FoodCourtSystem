@@ -5,35 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section css {
+    <link rel="stylesheet" href="../../Content/UI/Menu.css" />    
+}
+
 <h2>Menu</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div class="container">
+<form asp-controller="Menu" asp-action="Search">
+    <p>
+        <input type="text" name="SearchString" value="Tên món">
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+</form>
+<div class="food-list">
     @foreach (var item in Model)
     {
-        string imgPath = "~/Image/" + item.ImageName + ".jpg";
-        <div class="item col-xs-4 col-lg-4">
-            <div class="thumbnail card">
-                <div class="img-event">
-                    <img class="list-group-image img-fluid" src="~/Image/bunrieucua.jpg" />
-                </div>
+        string imgPath = "../../Image/" + item.ImageName;
+        <div class="food-item card" style="width: 20rem;">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" style="width: 16rem;" src="@imgPath" alt="Image not found" />
                 <div class="caption card-body">
                     <h4 class="group card-title inner list-group-item-heading">@Html.DisplayFor(modelItem => item.Name)</h4>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead">@Html.DisplayFor(modelItem => item.UnitPrice)</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="@Url.Action("Index","Home")">Add to cart</a>
-                        </div>
-                    </div>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.UnitPrice)</p>
+                    <a class="btn btn-success" href="@Url.Action("Index","Home")">Add to cart</a>
                 </div>
-
-
             </div>
         </div>
     }

@@ -89,63 +89,6 @@ h1 {
     }
 }
 
-
-.nav-brand {
-    margin-left: 1cm;
-    margin-right: 1cm;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    color: white;
-}
-
-.navbar-modification {
-    background-color: black;
-}
-
-.search-form-control {
-    width: 600px;
-}
-
-#input-control {
-    width: 70%;
-    height: 80%;
-}
-
-.home {
-    margin: 10px;
-    color: white;
-}
-
-    .home:hover {
-        background-color: black;
-    }
-
-.infomation {
-    margin: 10px;
-}
-
-    .infomation:hover {
-        background-color: black;
-    }
-
-.checkout {
-    float: right;
-}
-
-.nav-btn:hover {
-    background-color: #A9A9A9;
-}
-
-.nav-btn {
-    background-color: black;
-    color: white;
-    padding: 18px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
 .greeting {
     text-align: center;
     position: fixed;
@@ -156,9 +99,4 @@ h1 {
 .order-btn {
     width: 50%;
     height: 1.5cm;
-}
-
-a:link, a:visited {
-    color: white;
-    text-decoration: none;
 }

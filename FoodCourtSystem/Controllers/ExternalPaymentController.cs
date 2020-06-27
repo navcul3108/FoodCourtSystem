@@ -71,6 +71,7 @@ namespace FoodCourtSystem.Controllers
             if(disposing)
             {
                 db.Dispose();
+                base.Dispose(disposing);
                 //httpClient.Dispose();
             }
 

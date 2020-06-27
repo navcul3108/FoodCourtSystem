@@ -28,8 +28,6 @@ namespace FoodCourtSystem.Models
         public AccountFundContext():base("AccountFundContext")
         { }
         public DbSet<AccountFundModel> accountFunds { get; set; }
-
-        public System.Data.Entity.DbSet<FoodCourtSystem.Models.PaymentRequestModel> PaymentRequestModels { get; set; }
     }
 
 }

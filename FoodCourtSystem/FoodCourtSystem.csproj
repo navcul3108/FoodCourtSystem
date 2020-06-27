@@ -195,12 +195,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\UI\Home.css" />
+    <Content Include="Content\UI\Login.css" />
+    <Content Include="Content\UI\Menu.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Image\bunrieucua.jpg" />
-    <Content Include="Image\comsuon.jpg" />
     <Content Include="Image\UI\bg-1.jpg" />
     <Content Include="Image\UI\bg-2.jpg" />
     <Content Include="Image\UI\bg-3.jpg" />
@@ -253,6 +253,8 @@
     <Content Include="Views\AccountPayment\ViewFund.cshtml" />
     <Content Include="Views\AccountPayment\ChargeAccount.cshtml" />
     <Content Include="Views\ExternalPayment\Pay.cshtml" />
+    <Content Include="Views\Shared\NotPermissionToAccess.cshtml" />
+    <Content Include="Views\Shared\_MenuLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

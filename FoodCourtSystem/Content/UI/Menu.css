@@ -1,0 +1,37 @@
+﻿
+
+.search-btn {
+    width: 80px;
+    height: 80%;
+    border: none;
+    background-color: orange;
+}
+
+    .search-btn:hover {
+        background-color: orange;
+    }
+
+
+
+.search-btn:visited {
+    background-color: orange;
+}
+
+.food-list {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: cornsilk
+}
+
+.food-item {
+    border: orange;
+    margin: 10px;
+    background-color: seashell;
+    text-align: center;
+}
+
+    .food-item img {
+        width: 8cm;
+        height: 6cm;
+    }

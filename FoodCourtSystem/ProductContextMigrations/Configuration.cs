@@ -9,7 +9,8 @@ namespace FoodCourtSystem.ProductContextMigrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"ProductContextMigrations";
         }
 

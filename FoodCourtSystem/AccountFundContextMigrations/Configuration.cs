@@ -9,7 +9,8 @@ namespace FoodCourtSystem.AccountFundContextMigrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"AccountFundContextMigrations";
         }
 
