@@ -25,8 +25,8 @@
     {
         string imgPath = "../../Image/" + item.ImageName;
         <div class="food-item card" style="width: 20rem;">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" style="width: 16rem;" src="@imgPath" alt="Image not found" />
+            <div class="card">
+                <img class="card-img-top" src="@imgPath" alt="Image not found" />
                 <div class="caption card-body">
                     <h4 class="group card-title inner list-group-item-heading">@Html.DisplayFor(modelItem => item.Name)</h4>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.UnitPrice)</p>

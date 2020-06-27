@@ -49,3 +49,61 @@
     .nav-btn:hover {
         background-color: black;
     }
+.cartbtn {
+    background-color: orange;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3cm;
+    border: none;
+}
+
+    .cartbtn:hover {
+        background-color: #FFD700;
+    }
+
+.dropbtn {
+    background-color: #4169E1;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border-color: black;
+    cursor: pointer;
+    border-radius: 3cm;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #4169E1;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #1E90FF;
+}

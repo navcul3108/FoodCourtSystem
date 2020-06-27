@@ -12,6 +12,10 @@ namespace FoodCourtSystem.Controllers
     {
         CartDbContext db = new CartDbContext();
         // GET: Cart
+        public ActionResult ViewCart()
+        {
+            return View();
+        }
         public ActionResult AddToCart(string username,CartItemModel item)
         {
             return View();
