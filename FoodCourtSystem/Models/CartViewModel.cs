@@ -8,6 +8,7 @@ namespace FoodCourtSystem.Models
 {
     public class CartItemModel
     {
+
         public int Quantity { get; set; }
         public int TotalMoney { get; set;}
         public ProductModel Product { get; set; }
@@ -16,7 +17,6 @@ namespace FoodCourtSystem.Models
             return Product.UnitPrice * Quantity;
         }
     }
-
     public class CartModel
     {
         public string OwnerName { get; set; }
@@ -42,5 +42,6 @@ namespace FoodCourtSystem.Models
         public CartDbContext(): base("CartContext")
         { }
         public DbSet<CartModel> carts;
+        
     }
 }
