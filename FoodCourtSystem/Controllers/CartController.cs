@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using FoodCourtSystem.Models;
 using System.Web.UI.WebControls;
 using System.Net.Http;
+using System.Data.Entity.Migrations;
+using System.Collections.ObjectModel;
 
 namespace FoodCourtSystem.Controllers
 { 
@@ -36,11 +38,10 @@ namespace FoodCourtSystem.Controllers
             var cart = cartContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
             if (cart == null)
             {
-                cart = new CartModel()
-                {
-                    ID = DateTime.Now.Ticks.ToString(),
-                    OwnerName = context.User.Identity.Name,
-                };
+                cart = cartContext.Carts.Create();
+                cart.ID = DateTime.Now.Ticks.ToString();
+                cart.OwnerName = context.User.Identity.Name;
+                cart.Items = new List<CartItemModel>();
             }
             var cartItem = cart.Items.SingleOrDefault(item => item.Product.ID == productId);
 
@@ -54,6 +55,9 @@ namespace FoodCourtSystem.Controllers
                     Cart = cart,
                     TotalMoney = product.UnitPrice 
                 };
+
+                cartContext.CartItems.Add(cartItem);
+
                 cart.Items.Add(cartItem);
                 cart.UpdateTotalMoney();
             }
@@ -61,12 +65,14 @@ namespace FoodCourtSystem.Controllers
             {
                 cartItem.Quantity++;
                 cartItem.TotalMoney += cartItem.Product.UnitPrice;
+                cartContext.CartItems.AddOrUpdate(cartItem);
                 cart.UpdateTotalMoney();
             }
-            cartContext.Carts.Add(cart);
+
+            cartContext.Carts.AddOrUpdate(cart);
             cartContext.SaveChanges();
 
-            return new EmptyResult();
+            return RedirectToAction("Index", "Menu");
         }
 
 

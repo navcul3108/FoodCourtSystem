@@ -21,6 +21,7 @@ namespace FoodCourtSystem.Models
         }
         [ForeignKey("ID")]
         public CartModel Cart { get; set;}
+        public string CartID { get; set; }
     }
     public class CartModel
     {
@@ -32,7 +33,6 @@ namespace FoodCourtSystem.Models
         public int TotalMoney { get; set; }
         public CartModel()
         {
-            Items = new List<CartItemModel>();
             VAT = 0.1;
             TotalMoney = 0;
         }
@@ -50,6 +50,6 @@ namespace FoodCourtSystem.Models
         public CartContext(): base("CartContext")
         { }
         public DbSet<CartModel> Carts { get; set; }
-
+        public DbSet<CartItemModel> CartItems { get; set; }
     }
 }
