@@ -16,7 +16,7 @@ namespace FoodCourtSystem.Controllers
         AccountFundContext db = new AccountFundContext();
         
         // GET: AccountPayment
-        public async Task<ActionResult> ViewFund(string userName)
+        public ActionResult ViewFund(string userName)
         {
             if (userName == null)
                 return View("Error");

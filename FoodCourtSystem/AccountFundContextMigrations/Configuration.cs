@@ -5,7 +5,7 @@ namespace FoodCourtSystem.AccountFundContextMigrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FoodCourtSystem.Models.AccountFundContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Models.AccountFundContext>
     {
         public Configuration()
         {
@@ -14,7 +14,7 @@ namespace FoodCourtSystem.AccountFundContextMigrations
             MigrationsDirectory = @"AccountFundContextMigrations";
         }
 
-        protected override void Seed(FoodCourtSystem.Models.AccountFundContext context)
+        protected override void Seed(Models.AccountFundContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 
 namespace FoodCourtSystem.Models
@@ -13,15 +14,17 @@ namespace FoodCourtSystem.Models
         public string ID { get; set; }
         public int Quantity { get; set; }
         public int TotalMoney { get; set;}
-        [ForeignKey("ID")]
-        public virtual ProductModel Product { get; set; }
+        public string ProductID { get; set; }
+        [ForeignKey("ProductID")]
+        public ProductModel Product { get; set; }
+        public CartModel Cart { get; set; }
+        public string CartID { get; set; }
         public void UpdateTotalMoney()
         {
             TotalMoney = Product.UnitPrice * Quantity;
         }
-        [ForeignKey("ID")]
-        public CartModel Cart { get; set;}
-        public string CartID { get; set; }
+
+
     }
     public class CartModel
     {
@@ -35,6 +38,7 @@ namespace FoodCourtSystem.Models
         {
             VAT = 0.1;
             TotalMoney = 0;
+            Items = new HashSet<CartItemModel>();
         }
         public void UpdateTotalMoney()
         {
@@ -45,11 +49,4 @@ namespace FoodCourtSystem.Models
         }
     }
 
-    public class CartContext: DbContext
-    {
-        public CartContext(): base("CartContext")
-        { }
-        public DbSet<CartModel> Carts { get; set; }
-        public DbSet<CartItemModel> CartItems { get; set; }
-    }
 }

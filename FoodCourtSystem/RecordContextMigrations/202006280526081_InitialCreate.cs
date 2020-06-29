@@ -35,22 +35,6 @@ namespace FoodCourtSystem.RecordContextMigrations
                 .ForeignKey("dbo.RecordModels", t => t.RecordModel_ID)
                 .Index(t => t.Product_ID)
                 .Index(t => t.RecordModel_ID);
-            
-            //CreateTable(
-            //    "dbo.ProductModels",
-            //    c => new
-            //        {
-            //            ID = c.String(nullable: false, maxLength: 128),
-            //            Name = c.String(nullable: false, maxLength: 50),
-            //            UnitPrice = c.Int(nullable: false),
-            //            ImageName = c.String(nullable: false, maxLength: 40),
-            //            Description = c.String(nullable: false, maxLength: 200),
-            //            Category_ID = c.String(maxLength: 128),
-            //        })
-            //    .PrimaryKey(t => t.ID)
-            //    .ForeignKey("dbo.CategoryModels", t => t.Category_ID)
-            //    .Index(t => t.Category_ID);
-
         }
         
         public override void Down()
@@ -59,13 +43,9 @@ namespace FoodCourtSystem.RecordContextMigrations
             DropForeignKey("dbo.RecordItemModels", "RecordModel_ID", "dbo.RecordModels");
             DropForeignKey("dbo.RecordItemModels", "Product_ID", "dbo.ProductModels");
             DropForeignKey("dbo.ProductModels", "Category_ID", "dbo.CategoryModels");
-            //DropIndex("dbo.ProductModels", new[] { "Category_ID" });
             DropIndex("dbo.RecordItemModels", new[] { "RecordModel_ID" });
             DropIndex("dbo.RecordItemModels", new[] { "Product_ID" });
             DropIndex("dbo.RecordModels", new[] { "Vendor_ID" });
-            //DropTable("dbo.VendorModels");
-            //DropTable("dbo.CategoryModels");
-            //DropTable("dbo.ProductModels");
             DropTable("dbo.RecordItemModels");
             DropTable("dbo.RecordModels");
         }

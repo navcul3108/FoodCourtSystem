@@ -9,77 +9,110 @@ using System.Web.UI.WebControls;
 using System.Net.Http;
 using System.Data.Entity.Migrations;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Validation;
+using System.Web.Services.Description;
 
 namespace FoodCourtSystem.Controllers
 { 
     [Authorize(Roles = "Regular, Guest")]
     public class CartController : Controller
     {
-        CartContext cartContext = new CartContext();
-        ProductContext productContext = new ProductContext();
-        OrderContext orderContext = new OrderContext();
+        MenuContext menuContext = new MenuContext();
+        //OrderContext orderContext = new OrderContext();
         // GET: Cart
         public ActionResult ShoppingCart(string OwnerName)
         {
-            CartModel model = cartContext.Carts.SingleOrDefault(item => item.OwnerName==OwnerName);
+            CartModel model = menuContext.Carts.SingleOrDefault(item => item.OwnerName==OwnerName);
             if (model != null)
+            {
+                foreach (var cartItem in model.Items)
+                    cartItem.Product = menuContext.Products.Single(item => item.ID == cartItem.ProductID);
                 return View(model);
+            }       
             else
                 return View("Error");
         }
 
         public ActionResult AddToCart(string productId)
         {
-            var product = productContext.Products.SingleOrDefault(c => c.ID == productId);
-            if (product == null) { return View("Error"); }
-
-            HttpContextBase context = this.HttpContext;
-
-            var cart = cartContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
-            if (cart == null)
+            try
             {
-                cart = cartContext.Carts.Create();
-                cart.ID = DateTime.Now.Ticks.ToString();
-                cart.OwnerName = context.User.Identity.Name;
-                cart.Items = new List<CartItemModel>();
-            }
-            var cartItem = cart.Items.SingleOrDefault(item => item.Product.ID == productId);
+                var product = menuContext.Products.SingleOrDefault(c => c.ID == productId);
+                if (product == null)
+                    return View("Error");
 
-            if (cartItem == null)
-            {
-                cartItem = new CartItemModel()
+                HttpContextBase context = this.HttpContext;
+
+                var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+                if (cart == null)
                 {
-                    Product = product,
-                    Quantity = 1,
-                    ID = DateTime.Now.Ticks.ToString(),
-                    Cart = cart,
-                    TotalMoney = product.UnitPrice 
-                };
+                    cart = new CartModel()
+                    {
+                        ID = DateTime.Now.Ticks.ToString(),
+                        OwnerName = context.User.Identity.Name,
+                    };
+                }
+                var cartItem = menuContext.CartItems.SingleOrDefault(item => item.Product.ID == productId && item.CartID == cart.ID);
 
-                cartContext.CartItems.Add(cartItem);
+                if (cartItem == null)
+                {
+                    cartItem = new CartItemModel
+                    {
+                        Product = new ProductModel() {
+                            ID = product.ID,
+                            Name = product.Name,
+                            UnitPrice = product.UnitPrice,
+                            ImageName = product.ImageName,
+                            Description = product.Description,
+                            Category = new CategoryModel ()
+                            {
+                                ID = product.Category.ID,
+                                Name = product.Category.Name
+                            }
+                        },
+                        Quantity = 1,
+                        ID = DateTime.Now.Ticks.ToString(),
+                        CartID = cart.ID,
+                        TotalMoney = product.UnitPrice
+                    };
 
-                cart.Items.Add(cartItem);
-                cart.UpdateTotalMoney();
+                    cart.Items.Add(cartItem);
+                    cart.TotalMoney += cartItem.TotalMoney;
+                }
+                else
+                {
+                    cartItem.Quantity++;
+                    cartItem.TotalMoney += cartItem.Product.UnitPrice;
+                    cart.TotalMoney += cartItem.Product.UnitPrice;
+                }
+                menuContext.CartItems.AddOrUpdate(cartItem);
+                menuContext.Carts.AddOrUpdate(cart);
+                menuContext.SaveChanges();
+
+                return RedirectToAction("Index", "Menu");
             }
-            else
+            catch (DbEntityValidationException e)
             {
-                cartItem.Quantity++;
-                cartItem.TotalMoney += cartItem.Product.UnitPrice;
-                cartContext.CartItems.AddOrUpdate(cartItem);
-                cart.UpdateTotalMoney();
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                   string Message = String.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        string sub_mess = String.Format("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
             }
-
-            cartContext.Carts.AddOrUpdate(cart);
-            cartContext.SaveChanges();
-
-            return RedirectToAction("Index", "Menu");
+            
         }
 
 
         public ActionResult RemoveFromCart(string cartItemId)
         {
             HttpContextBase context = this.HttpContext;
-            var cart = cartContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+            var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
             if (cart == null)
             {
                 return View("Error");
@@ -97,8 +130,17 @@ namespace FoodCourtSystem.Controllers
                     cart.Items.Remove(cartitem);
                 }
             }
-            cartContext.SaveChanges();
+            menuContext.SaveChanges();
             return new EmptyResult();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                menuContext.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

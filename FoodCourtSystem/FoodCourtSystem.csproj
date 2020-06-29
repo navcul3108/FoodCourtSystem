@@ -180,22 +180,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MenuContextMigrations\202006291305540_IniialCreate.cs" />
+    <Compile Include="MenuContextMigrations\202006291305540_IniialCreate.Designer.cs">
+      <DependentUpon>202006291305540_IniialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountFundViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartModel.cs" />
-    <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\ExternalPaymentModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MenuContext.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\RecordModel.cs" />
     <Compile Include="Models\VendorModel.cs" />
-    <Compile Include="ProductContextMigrations\202006290225565_InitialCreate.cs" />
-    <Compile Include="ProductContextMigrations\202006290225565_InitialCreate.Designer.cs">
-      <DependentUpon>202006290225565_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProductContextMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordContextMigrations\202006280526081_InitialCreate.cs" />
     <Compile Include="RecordContextMigrations\202006280526081_InitialCreate.Designer.cs">
@@ -277,8 +277,8 @@
     <Content Include="Views\Shared\NotPermissionToAccess.cshtml" />
     <Content Include="Views\Shared\_MenuLayout.cshtml" />
     <Content Include="Views\Home\ViewOrder.cshtml" />
-    <Content Include="Views\Cart\ShoppingCart2.cshtml" />
     <Content Include="Views\Cart\ShoppingCart.cshtml" />
+    <Content Include="Views\Cart\ShoppingCart1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,8 +299,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ProductContextMigrations\202006290225565_InitialCreate.resx">
-      <DependentUpon>202006290225565_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="MenuContextMigrations\202006291305540_IniialCreate.resx">
+      <DependentUpon>202006291305540_IniialCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RecordContextMigrations\202006280526081_InitialCreate.resx">
       <DependentUpon>202006280526081_InitialCreate.cs</DependentUpon>

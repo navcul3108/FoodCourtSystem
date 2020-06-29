@@ -11,7 +11,7 @@ namespace FoodCourtSystem.Controllers
 {
     public class MenuController : Controller
     {
-        FoodCourtSystem.Models.ProductContext db = new Models.ProductContext();
+        MenuContext db = new Models.MenuContext();
         public MenuController() { }
         // GET: Menu
         public ActionResult Index()

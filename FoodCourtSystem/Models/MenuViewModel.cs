@@ -16,7 +16,7 @@ namespace FoodCourtSystem.Models
         [Range(5000, 100000, ErrorMessage ="Giá tiền trong khoảng 5000-100000")]
         public int UnitPrice { get; set; }
         [Required]
-        [StringLength(40, MinimumLength =8)]
+        [StringLength(40)]
         public string ImageName { set; get; }
         [Required]
         [StringLength(200)]
@@ -38,15 +38,6 @@ namespace FoodCourtSystem.Models
     public class MenuViewModel
     {
         public virtual ICollection<CategoryModel> Categories { get; set; }
-    }
-
-    public class ProductContext: DbContext
-    {
-        public ProductContext():base("ProductContext")
-        {
-        }
-        public System.Data.Entity.DbSet<ProductModel> Products { get; set; }
-        public System.Data.Entity.DbSet<CategoryModel> Categories { get; set; }
     }
     
 

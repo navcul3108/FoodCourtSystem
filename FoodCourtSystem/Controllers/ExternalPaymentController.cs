@@ -20,7 +20,7 @@ namespace FoodCourtSystem.Controllers
         {
             httpClient = new HttpClient();
         }
-        public ActionResult Pay()
+        public ActionResult Pay(CartModel cart)
         {
             return View();
         }
