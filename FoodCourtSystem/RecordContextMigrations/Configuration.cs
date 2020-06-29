@@ -1,19 +1,19 @@
-namespace FoodCourtSystem.ProductContextMigrations
+namespace FoodCourtSystem.RecordContextMigrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FoodCourtSystem.Models.CartContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FoodCourtSystem.Models.RecordContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            MigrationsDirectory = @"ProductContextMigrations";
+            MigrationsDirectory = @"RecordContextMigrations";
         }
 
-        protected override void Seed(FoodCourtSystem.Models.CartContext context)
+        protected override void Seed(FoodCourtSystem.Models.RecordContext context)
         {
             //  This method will be called after migrating to the latest version.
 

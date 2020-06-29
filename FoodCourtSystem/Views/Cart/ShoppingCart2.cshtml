@@ -1,0 +1,290 @@
+﻿@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+
+}
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="container col-9">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="HinhThucDon/Mon bo/bcn.jpg"
+                                     class="card-img w-100 h-100"
+                                     alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="HinhThucDon/Mon bo/bkt.jpg"
+                                     class="card-img w-100 h-100"
+                                     alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="HinhThucDon/Mon bo/bnll.jpg"
+                                     class="card-img w-100 h-100"
+                                     alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." class="card-img" alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." class="card-img" alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." class="card-img" alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." class="card-img" alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3 h-auto" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." class="card-img" alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Card title
+                                        <button type="button" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                    </h5>
+                                    <p class="card-text">
+                                        Price: 20,000
+                                    </p>
+                                    <div class="form-group">
+                                        <input type="number"
+                                               min="0"
+                                               max="10"
+                                               class="form-control"
+                                               placeholder="Number of items" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3 mb-3">
+            <div class="jumbotron position-fixed">
+                <h1 class="display-4">Receipt</h1>
+                <p>Sum: 100,000</p>
+                <p>VAT: 15,000 (15%)</p>
+                <p>Discount: 0 (0%)</p>
+                <hr class="my-4" />
+                <p class="lead">Total: 115,000.</p>
+                <a class="btn btn-primary" href="#" role="button">Checkout</a>
+                <a href="#" class="btn">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>

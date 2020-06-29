@@ -176,20 +176,38 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\RecordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountFundViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\ExternalPaymentModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\RecordModel.cs" />
+    <Compile Include="Models\VendorModel.cs" />
+    <Compile Include="ProductContextMigrations\202006290225565_InitialCreate.cs" />
+    <Compile Include="ProductContextMigrations\202006290225565_InitialCreate.Designer.cs">
+      <DependentUpon>202006290225565_InitialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductContextMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordContextMigrations\202006280526081_InitialCreate.cs" />
+    <Compile Include="RecordContextMigrations\202006280526081_InitialCreate.Designer.cs">
+      <DependentUpon>202006280526081_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecordContextMigrations\Configuration.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="VendorContextMigrations\202006280533370_InitialCreate.cs" />
+    <Compile Include="VendorContextMigrations\202006280533370_InitialCreate.Designer.cs">
+      <DependentUpon>202006280533370_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VendorContextMigrations\Configuration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -210,7 +228,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\ViewOrder.js" />
+    <Content Include="Scripts\UI\Menu.js" />
+    <Content Include="Scripts\UI\ViewOrder.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -258,11 +277,13 @@
     <Content Include="Views\Shared\NotPermissionToAccess.cshtml" />
     <Content Include="Views\Shared\_MenuLayout.cshtml" />
     <Content Include="Views\Home\ViewOrder.cshtml" />
+    <Content Include="Views\Cart\ShoppingCart2.cshtml" />
     <Content Include="Views\Cart\ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Order\" />
+    <Folder Include="Views\Record\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -276,6 +297,17 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProductContextMigrations\202006290225565_InitialCreate.resx">
+      <DependentUpon>202006290225565_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordContextMigrations\202006280526081_InitialCreate.resx">
+      <DependentUpon>202006280526081_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VendorContextMigrations\202006280533370_InitialCreate.resx">
+      <DependentUpon>202006280533370_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

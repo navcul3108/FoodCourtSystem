@@ -9,54 +9,90 @@ using System.Web.UI.WebControls;
 using System.Net.Http;
 
 namespace FoodCourtSystem.Controllers
-{
+{ 
+    [Authorize(Roles = "Regular, Guest")]
     public class CartController : Controller
     {
-        CartDbContext db = new CartDbContext();
+        CartContext cartContext = new CartContext();
+        ProductContext productContext = new ProductContext();
+        OrderContext orderContext = new OrderContext();
         // GET: Cart
-        public ActionResult ShoppingCart()
+        public ActionResult ShoppingCart(string OwnerName)
         {
-            return View(db.carts);
+            CartModel model = cartContext.Carts.SingleOrDefault(item => item.OwnerName==OwnerName);
+            if (model != null)
+                return View(model);
+            else
+                return View("Error");
         }
-        public ActionResult AddToCart(string username, CartItemModel item)
-        {
-            var cart = db.carts.SingleOrDefault(c => c.OwnerName == username);
 
-            if(cart == null)
+        public ActionResult AddToCart(string productId)
+        {
+            var product = productContext.Products.SingleOrDefault(c => c.ID == productId);
+            if (product == null) { return View("Error"); }
+
+            HttpContextBase context = this.HttpContext;
+
+            var cart = cartContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+            if (cart == null)
             {
-                cart = db.carts.Add(new CartModel()) ;
-                cart.OwnerName = username;               
+                cart = new CartModel()
+                {
+                    ID = DateTime.Now.Ticks.ToString(),
+                    OwnerName = context.User.Identity.Name,
+                };
             }
-            cart.items.Add(item);
-            cart.TotalMoney += item.TotalMoney;
-            db.SaveChanges();
-            return View("ViewCart");
-        }
+            var cartItem = cart.Items.SingleOrDefault(item => item.Product.ID == productId);
 
-
-        public ActionResult RemoveFromCart(string username, CartItemModel item)
-        {
-            
-            var cart = db.carts.SingleOrDefault(c => c.OwnerName == username);
-            if(cart == null)
+            if (cartItem == null)
             {
-                return View();
+                cartItem = new CartItemModel()
+                {
+                    Product = product,
+                    Quantity = 1,
+                    ID = DateTime.Now.Ticks.ToString(),
+                    Cart = cart,
+                    TotalMoney = product.UnitPrice 
+                };
+                cart.Items.Add(cartItem);
+                cart.UpdateTotalMoney();
             }
             else
             {
-                var cartitem = cart.items.SingleOrDefault(ci => ci == item);
-                if(cartitem == null)
+                cartItem.Quantity++;
+                cartItem.TotalMoney += cartItem.Product.UnitPrice;
+                cart.UpdateTotalMoney();
+            }
+            cartContext.Carts.Add(cart);
+            cartContext.SaveChanges();
+
+            return new EmptyResult();
+        }
+
+
+        public ActionResult RemoveFromCart(string cartItemId)
+        {
+            HttpContextBase context = this.HttpContext;
+            var cart = cartContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+            if (cart == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                var cartitem = cart.Items.SingleOrDefault(ci => ci.ID == cartItemId);
+                if (cartitem == null)
                 {
-                    return View();
+                    return View("Error");
                 }
                 else
                 {
-                    cart.items.Remove(cartitem);
-                    cart.TotalMoney -= item.TotalMoney;
+                    cart.TotalMoney -= cartitem.TotalMoney;
+                    cart.Items.Remove(cartitem);
                 }
             }
-            db.SaveChanges();
-            return View();
+            cartContext.SaveChanges();
+            return new EmptyResult();
         }
     }
 }

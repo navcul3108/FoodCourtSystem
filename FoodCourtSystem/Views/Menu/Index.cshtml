@@ -6,14 +6,12 @@
 }
 
 @section css {
-    <link rel="stylesheet" href="../../Content/UI/Menu.css" />    
+    <link rel="stylesheet" href="../../Content/UI/Menu.css" />
 }
+
 
 <h2>Menu</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <form asp-controller="Menu" asp-action="Search">
     <p>
         <input type="text" name="SearchString" value="Tên món">
@@ -30,7 +28,7 @@
                 <div class="caption card-body">
                     <h4 class="group card-title inner list-group-item-heading">@Html.DisplayFor(modelItem => item.Name)</h4>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.UnitPrice)</p>
-                    <a class="btn btn-success" href="@Url.Action("Index","Home")">Add to cart</a>
+                    <a class="btn btn-success addButton" href="@Url.Action("AddToCart","Cart", new { productId = item.ID })">Add to cart</a>
                 </div>
             </div>
         </div>
