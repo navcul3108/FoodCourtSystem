@@ -40,7 +40,7 @@ namespace FoodCourtSystem.Controllers
                 var product = menuContext.Products.SingleOrDefault(c => c.ID == productId);
                 if (product == null)
                     return View("Error");
-
+                
                 HttpContextBase context = this.HttpContext;
 
                 var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
@@ -58,18 +58,8 @@ namespace FoodCourtSystem.Controllers
                 {
                     cartItem = new CartItemModel
                     {
-                        Product = new ProductModel() {
-                            ID = product.ID,
-                            Name = product.Name,
-                            UnitPrice = product.UnitPrice,
-                            ImageName = product.ImageName,
-                            Description = product.Description,
-                            Category = new CategoryModel ()
-                            {
-                                ID = product.Category.ID,
-                                Name = product.Category.Name
-                            }
-                        },
+                        Product=null,
+                        ProductID = productId,
                         Quantity = 1,
                         ID = DateTime.Now.Ticks.ToString(),
                         CartID = cart.ID,
@@ -132,6 +122,17 @@ namespace FoodCourtSystem.Controllers
             }
             menuContext.SaveChanges();
             return new EmptyResult();
+        }
+
+        public ActionResult MakePayment(int totalPrice)
+        {
+            HttpContextBase context = this.HttpContext;
+            var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+            var deletedCartItems = menuContext.CartItems.Where(ci => ci.CartID == cart.ID);
+            menuContext.CartItems.RemoveRange(deletedCartItems);
+            menuContext.Carts.Remove(cart);
+            menuContext.SaveChanges();
+            return RedirectToAction("Pay", "ExternalPayment", new { amount = totalPrice });  
         }
 
         protected override void Dispose(bool disposing)

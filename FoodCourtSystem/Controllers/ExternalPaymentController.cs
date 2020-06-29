@@ -20,8 +20,9 @@ namespace FoodCourtSystem.Controllers
         {
             httpClient = new HttpClient();
         }
-        public ActionResult Pay(CartModel cart)
+        public ActionResult Pay(int amount)
         {
+            ViewBag.Amount = amount;
             return View();
         }
 
@@ -53,8 +54,8 @@ namespace FoodCourtSystem.Controllers
                 var response_content = await response.Content.ReadAsStringAsync();
                 MomoResponse mres = JsonConvert.DeserializeObject<MomoResponse>(response_content);
                 // Check response is valid
-                bool isValid = mres.CompareSignature();
-                if (!isValid)
+                
+                if (mres.errorCode!=0)
                     return View("Error");
                 else
                     return Redirect(mres.payUrl);

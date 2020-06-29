@@ -9,7 +9,7 @@ namespace FoodCourtSystem.MenuContextMigrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"MenuContextMigrations";
         }
 

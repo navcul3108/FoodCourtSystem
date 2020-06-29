@@ -68,7 +68,7 @@
                 <p>Discount: 0 (0%)</p>
                 <hr class="my-4" />
                 <p class="lead">Total: @Model.TotalMoney</p>
-                <a class="btn btn-primary" href="@Url.Action("Pay","ExternalPayment", new {cart = Model })" role="button">Thanh toán</a>
+                <a class="btn btn-primary" href="@Url.Action("MakePayment","Cart", new {totalPrice = Model.TotalMoney })" role="button">Thanh toán</a>
                 <a href="@Url.Action("Index", "Menu")" class="btn">Tiếp tục mua hàng</a>
             </div>
         </div>

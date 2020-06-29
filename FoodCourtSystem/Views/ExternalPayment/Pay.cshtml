@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Pay";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int amount = ViewBag.Amount;
 }
 
 @if (Request.IsAuthenticated)
@@ -16,18 +17,12 @@
                     @Html.Hidden("ID", DateTime.Now.Ticks.ToString())
                     @Html.Hidden("UserName", User.Identity.GetUserName())
                     <div class="form-group">
-                        <div class="col-md-4">Số tiền</div>
+                        <div class="col-md-4">Số tiền: @amount</div>
                         <div class="col-md-6">
-                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })
+                            @Html.Hidden("Amount", amount)
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-4">Mô tả</div>
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(m => m.Info, new { @class = "form-control" })
-                        </div>
-                    </div>
+                    @Html.Hidden("Info","Thanh toán")
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Thanh toán" class="btn btn-default" />
