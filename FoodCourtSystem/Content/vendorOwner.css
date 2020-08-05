@@ -1,0 +1,81 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  height: 90vh;
+}
+
+.container-fluid > .row {
+  height: 100%;
+}
+
+.col-sm-9 {
+  background-image: url("https://www.abc.net.au/news/image/10700186-3x2-940x627.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.col-sm-9 > div {
+  position: absolute;
+  top: 6rem;
+  left: 4rem;
+}
+
+.col-sm-9 > div > h1 {
+  width: 80%;
+  color: white;
+  font-size: 3rem;
+}
+
+.col-sm-9 > div > p {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.col-sm-3 > .row {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.col-sm-3 > .row:hover * {
+  transition: all 0.5s;
+}
+
+.col-sm-3 > .row:hover * {
+  transform: scale(1.1);
+}
+
+.row > i {
+  font-size: 5rem;
+  color: white;
+}
+
+a {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  position: relative;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: all 0.5s;
+}
+
+a:hover::after {
+  width: 100%;
+}

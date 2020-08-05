@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FoodCourtSystem.Models;
+using System.EnterpriseServices;
 
 namespace FoodCourtSystem.Controllers
 {
@@ -79,7 +80,7 @@ namespace FoodCourtSystem.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("GoHomePageByRole", "Account");                    
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -125,6 +126,26 @@ namespace FoodCourtSystem.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult GoHomePageByRole()
+        {
+            if (User.IsInRole("Regular"))
+                return RedirectToAction("Index", "Home");
+            else if (User.IsInRole("Cook"))
+                return RedirectToAction("ViewOrderList", "Order");
+            else if (User.IsInRole("VendorOwner"))
+                return RedirectToAction("ViewVendorOwnerHomePage", "Home");
+            else if (User.IsInRole("Admin"))
+                return RedirectToAction("ViewAdminHomePage", "Home");
+            else
+                return View("Error");
+        }
+
+        [SecurityRole("Admin")]
+        public ActionResult ViewAllAccount()
+        {
+            return View();
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

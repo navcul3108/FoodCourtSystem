@@ -32,5 +32,17 @@ namespace FoodCourtSystem.Controllers
         {
             return View();
         }
+
+        [SecurityRole("VendorOwner")]
+        public ActionResult ViewVendorOwnerHomePage(string vendorID)
+        {
+            return View();
+        }
+
+        [SecurityRole("Admin")]
+        public ActionResult ViewAdminHomePage()
+        {
+            return View();
+        }
     }
 }

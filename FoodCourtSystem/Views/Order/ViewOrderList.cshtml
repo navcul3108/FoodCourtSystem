@@ -1,0 +1,483 @@
+﻿@model IEnumerable<FoodCourtSystem.Models.OrderModel>
+
+@{
+    ViewBag.Title = "ViewOrderList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+    <link rel="stylesheet" href="../../Content/OrderList.css" />
+}
+
+
+<!--Waiting orders-->
+@*<div class="outerContainer">
+        <div class="container border-right border-primary">
+            <p class="text-primary text-center">WAITING ORDERS</p>
+            <!--Cards-->
+            @foreach (FoodCourtSystem.Models.OrderModel order in Model)
+            {
+                if (order.Status == FoodCourtSystem.Models.OrderStatus.WAITING)
+                {
+                    <div class="card mb-3 mt-5" id="1" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://photo-1-baomoi.zadn.vn/w720x480/2020_03_05_119_34191826/4af6afa0b0e359bd00f2.jpg"
+                                     class="card-img"
+                                     alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@order.ID</h5>
+                                    <p class="card-text">
+                                        Created time: @order.CreatedTime
+                                    </p>
+
+                                    <!--This button is for modal-->
+                                    <button class="btn btn-primary details"
+                                            data-toggle="modal"
+                                            data-target="#@order.ID">
+                                        Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="@order.ID">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Order ID : @order.ID</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                                <!--Modal body-->
+                                @foreach (var item in order.Items)
+                                {
+                                    <div class="modal-body">
+                                        <!--Order details-->
+                                        <div class="card mb-3 h-auto" style="max-width: 540px;">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-4">
+                                                    <img src="https://photo-1-baomoi.zadn.vn/w720x480/2020_03_05_119_34191826/4af6afa0b0e359bd00f2.jpg"
+                                                         class="card-img"
+                                                         alt="..." />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">
+                                                            @item.Product.Name
+                                                        </h5>
+                                                        <div class="form-group">
+                                                            <a>Số lượng:</a>
+                                                            <input type="number"
+                                                                   value="@item.Quantity"
+                                                                   class="form-control"
+                                                                   placeholder="Number of items"
+                                                                   disabled />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!--End order details-->
+                                    </div>
+                                    <!--End modal body-->
+                                    <div class="modal-footer">
+                                        <a class="btn btn-primary" data-dismiss="modal" href="@Url.Action("ConfirmOrder", "Order", order.ID)">
+                                            Done
+                                        </a>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+            <!--Ready Orders-->
+            <div class="container border-bottom border-primary">
+                <p class="text-primary text-center">READY ORDERS</p>
+                <div>
+                    <div class="card mb-3 mt-5" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://mcisne.files.wordpress.com/2018/02/fullsizeoutput_1c13.jpeg?w=720"
+                                     class="card-img"
+                                     alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Order ID #1225</h5>
+                                    <p class="card-text">
+                                        Arrive time: 11g00
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Last updated 2 hours ago</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3 mt-5" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://media.theeverygirl.com/wp-content/uploads/2020/07/meal-delivery-kit-services-compared-the-everygirl-2-720x480.jpg"
+                                     class="card-img"
+                                     alt="..." />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Order ID #1220</h5>
+                                    <p class="card-text">
+                                        Arrive time: 10g55
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Last updated 2 hours ago</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Canceled Orders-->
+            <div class="container">
+                <p class="text-primary text-center">CANCELED ORDER</p>
+                <div class="card mb-3 mt-5" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://scontent.fymy1-2.fna.fbcdn.net/v/t1.0-0/p480x480/102685254_3376656332346693_8435387628441829376_n.jpg?_nc_cat=111&_nc_sid=110474&_nc_eui2=AeEQ8JrAgeicO2Lb6S9dXnTzm48ts2saT4mbjy2zaxpPiSiNXOoJCNtbQVjAi0Z_nbI&_nc_oc=AQmM-9fd_rFsqD-99tAn43x36C92egSn3NKmsmnKg0ghB25qMJ16cGYfncipcp_kKZrzOyQr1OhdfLukJE4Wdcs2&_nc_ht=scontent.fymy1-2.fna&_nc_tp=6&oh=5f5c1e5b3b72e72a98a4c3de8aac8d7f&oe=5F324833"
+                                 class="card-img"
+                                 alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Order ID #1232</h5>
+                                <p class="card-text">
+                                    Arrive time: 11g45
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">Last updated 45 mins ago</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>*@
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Here are</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <!--Modal body-->
+            <div class="modal-body">
+                <!--Order details-->
+                <div class="card mb-3 h-auto" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://photo-1-baomoi.zadn.vn/w720x480/2020_03_05_119_34191826/4af6afa0b0e359bd00f2.jpg"
+                                 class="card-img"
+                                 alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Bánh mì
+                                </h5>
+                                <p class="card-text">
+                                    Price: 20,000
+                                </p>
+                                <div class="form-group">
+                                    <a>So luong: </a>
+                                    <input value="3"
+                                           type="number"
+                                           min="0"
+                                           max="10"
+                                           class="form-control"
+                                           placeholder="Number of items"
+                                           disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3 h-auto" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://i.pinimg.com/736x/2b/6a/5e/2b6a5e5f52272da84b41ca1e5e7624a4.jpg"
+                                 class="card-img"
+                                 alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Bánh mì ngọt
+                                </h5>
+                                <p class="card-text">
+                                    Price: 25,000
+                                </p>
+                                <div class="form-group">
+                                    <input value="3"
+                                           type="number"
+                                           min="0"
+                                           max="10"
+                                           class="form-control"
+                                           placeholder="Number of items"
+                                           disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3 h-auto" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://giavinauan.net/wp-content/uploads/2018/06/nam-ngu-nhan-vang-mon-an-ngon.jpg"
+                                 class="card-img"
+                                 alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Bánh cuốn
+                                </h5>
+                                <p class="card-text">
+                                    Price: 20,000
+                                </p>
+                                <div class="form-group">
+                                    <input value="3"
+                                           type="number"
+                                           min="0"
+                                           max="10"
+                                           class="form-control"
+                                           placeholder="Number of items"
+                                           disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End order details-->
+            </div>
+            <!--End modal body-->
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End modal section-->
+<!--Waiting orders-->
+<div class="outerContainer">
+    <div class="container border-right border-primary">
+        <p class="text-primary text-center">WAITING ORDERS</p>
+        <!--Cards-->
+        <div class="card mb-3 mt-5" id="1" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://photo-1-baomoi.zadn.vn/w720x480/2020_03_05_119_34191826/4af6afa0b0e359bd00f2.jpg"
+                         class="card-img"
+                         alt="..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID #1234</h5>
+                        <p class="card-text">
+                            Arrive time: 11g50
+                        </p>
+
+                        <!--This button is for modal-->
+                        <button class="btn btn-primary details"
+                                data-toggle="modal"
+                                data-target="#myModal">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3 mt-5" id="2" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://3.bp.blogspot.com/-5_vbWC6ud_8/UoeNuMkz-bI/AAAAAAAAAgo/CnHph2JIefU/s1600/197723_243535825670752_6039391_n.jpg"
+                         class="card-img"
+                         alt="..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID #1235</h5>
+                        <p class="card-text">
+                            Arrive time: 12g00
+                        </p>
+
+                        <!--This button is for modal-->
+                        <button class="btn btn-primary details"
+                                data-toggle="modal"
+                                data-target="#myModal">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3 mt-5" id="2" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://www.canr.msu.edu/contentAsset/image/b14fdb0a-c180-4e4a-a7c4-3113a4d4709a/fileAsset/filter/Resize,Jpeg/resize_w/720/jpeg_q/80"
+                         class="card-img"
+                         alt="..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID #1236</h5>
+                        <p class="card-text">
+                            Arrive time: 12g10
+                        </p>
+
+                        <!--This button is for modal-->
+                        <button class="btn btn-primary details"
+                                data-toggle="modal"
+                                data-target="#myModal">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3 mt-5" id="2" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://dichvuhangkhong.com.vn/wp-content/uploads/2013/12/ve-may-bay-di-toronto-3-1.jpg"
+                         class="card-img"
+                         alt="..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID #1237</h5>
+                        <p class="card-text">
+                            Arrive time: 12g15
+                        </p>
+
+                        <!--This button is for modal-->
+                        <button class="btn btn-primary details"
+                                data-toggle="modal"
+                                data-target="#myModal">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Cards end-->
+    </div>
+
+    <!--Ready Orders-->
+    <div class="container border-bottom border-primary">
+        <p class="text-primary text-center">READY ORDERS</p>
+        <div>
+            <div class="card mb-3 mt-5" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="https://mcisne.files.wordpress.com/2018/02/fullsizeoutput_1c13.jpeg?w=720"
+                             class="card-img"
+                             alt="..." />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Order ID #1225</h5>
+                            <p class="card-text">
+                                Arrive time: 11g00
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Last updated 2 hours ago</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3 mt-5" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="https://media.theeverygirl.com/wp-content/uploads/2020/07/meal-delivery-kit-services-compared-the-everygirl-2-720x480.jpg"
+                             class="card-img"
+                             alt="..." />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Order ID #1220</h5>
+                            <p class="card-text">
+                                Arrive time: 10g55
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Last updated 2 hours ago</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Canceled Orders-->
+    <div class="container">
+        <p class="text-primary text-center">CANCELED ORDER</p>
+        <div class="card mb-3 mt-5" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://scontent.fymy1-2.fna.fbcdn.net/v/t1.0-0/p480x480/102685254_3376656332346693_8435387628441829376_n.jpg?_nc_cat=111&_nc_sid=110474&_nc_eui2=AeEQ8JrAgeicO2Lb6S9dXnTzm48ts2saT4mbjy2zaxpPiSiNXOoJCNtbQVjAi0Z_nbI&_nc_oc=AQmM-9fd_rFsqD-99tAn43x36C92egSn3NKmsmnKg0ghB25qMJ16cGYfncipcp_kKZrzOyQr1OhdfLukJE4Wdcs2&_nc_ht=scontent.fymy1-2.fna&_nc_tp=6&oh=5f5c1e5b3b72e72a98a4c3de8aac8d7f&oe=5F324833"
+                         class="card-img"
+                         alt="..." />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID #1232</h5>
+                        <p class="card-text">
+                            Arrive time: 11g45
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">Last updated 45 mins ago</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="../../Scripts/UI/OrderList.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+}

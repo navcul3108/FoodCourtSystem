@@ -2,8 +2,11 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
+using System.EnterpriseServices;
 using System.Linq;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -16,7 +19,10 @@ namespace FoodCourtSystem.Controllers
         // GET: Menu
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            if (Request.IsAuthenticated)
+                return View(db.Products.ToList());
+            else
+                return RedirectToAction("Login", "Account");
         }
 
         public async Task<ActionResult> Search(string searchString)
@@ -29,17 +35,7 @@ namespace FoodCourtSystem.Controllers
             return RedirectToAction("Index");
         }
         
-        //
-        // GET: 
-        public ActionResult Create()
-        {
-            if (User.IsInRole("Admin"))
-            {
-                return View();
-            }
-            else
-                return View("NotPermissionToAccess");
-        }
+
 
         [HttpPost]
         public ActionResult Create([Bind(Include ="ID,Name,UnitPrice,ImageName,Description")] ProductModel p)
@@ -74,6 +70,33 @@ namespace FoodCourtSystem.Controllers
             return View();
         }
 
+        public ActionResult Edit()
+        {
+            if (User.IsInRole("VendorOwner"))
+            {
+                return View();
+            }
+            else
+                return View("NotPermissionToAccess");
+        }
+
+        [HttpPost]
+        [SecurityRole("VendorOwner")]
+        public ActionResult Edit([Bind(Include ="ID,Name,UnitPrice,ImageName,Description")] ProductModel product)
+        {
+            if (User.IsInRole("VendorOwner"))
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Products.AddOrUpdate(product);
+                    db.SaveChanges();
+                    return new EmptyResult();
+                }
+                return View("Error");
+            }
+            else
+                return View("NotPermissionToAccess");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Giỏ hàng";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section css {
+    
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
     <link rel="stylesheet"
@@ -16,60 +16,59 @@
 <div class="container mt-3">
     <h2>Giỏ hàng của @User.Identity.Name</h2>
     <div class="row">
-        <div class="col-11">
-            @foreach (FoodCourtSystem.Models.CartItemModel cartItem in Model.Items)
-            {
-                string imgPath = "../../Image/" + cartItem.Product.ImageName;
+        <div class="col-9">
+            
                 <div class="row">
                     <div class="container col-9">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card mb-3" style="max-width: 540px;">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            <img src="@imgPath"
-                                                 class="card-img w-100 h-100"
-                                                 alt="Image not found" />
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">
-                                                    @cartItem.Product.Name
-                                                    <button type="button" class="close">
-                                                        <span>&times;</span>
-                                                    </button>
-                                                </h5>
-                                                <p class="card-text">
-                                                    Price: @cartItem.TotalMoney
-                                                </p>
-                                                <div class="form-group">
-                                                    <input type="number"
-                                                           min="0"
-                                                           max="10"
-                                                           class="form-control"
-                                                           placeholder="Số lượng"
-                                                           value="@cartItem.Quantity" />
+                            @foreach (FoodCourtSystem.Models.CartItemModel cartItem in Model.Items)
+                            {
+                                string imgPath = "../../Image/" + cartItem.Product.ImageName;
+                                <div class="col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="@imgPath"
+                                                     class="card-img w-100 h-100"
+                                                     alt="Image not found" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        @cartItem.Product.Name
+                                                        <a type="button" class="close" href="@Url.Action("RemoveFromCart", "Cart", new { cartItemID = cartItem.ID })">
+                                                            <span>&times;</span>
+                                                        </a>
+                                                    </h5>
+                                                    <p class="card-text">
+                                                        Price: @cartItem.TotalMoney
+                                                    </p>
+                                                    <div class="form-group">
+                                                        <input type="number"
+                                                               class="form-control"
+                                                               placeholder="Số lượng"
+                                                               value="@cartItem.Quantity" 
+                                                               disabled/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            }
                             </div>
-                        </div>
                     </div>
                 </div>
-            }
         </div>
         <div class="col-3 mb-3">
             <div class="jumbotron float-right">
                 <h1 class="display-4">Receipt</h1>
                 <p>Sum: @Model.TotalMoney</p>
-                <p>VAT: 15,000 (15%)</p>
                 <p>Discount: 0 (0%)</p>
                 <hr class="my-4" />
                 <p class="lead">Total: @Model.TotalMoney</p>
                 <a class="btn btn-primary" href="@Url.Action("MakePayment","Cart", new {totalPrice = Model.TotalMoney })" role="button">Thanh toán</a>
-                <a href="@Url.Action("Index", "Menu")" class="btn">Tiếp tục mua hàng</a>
+                <a href="@Url.Action("Index", "Menu")" class="btn btn-warning">Tiếp tục mua hàng</a>
             </div>
         </div>
     </div> 
@@ -77,7 +76,7 @@
 
 @section scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    //<script src="main.js"></script>
+    <script src="../../Scripts/closeBtn.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>

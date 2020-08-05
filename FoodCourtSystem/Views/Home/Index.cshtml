@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 @section css{
-    <link rel="stylesheet" href="../../Content/UI/Home.css" />   
+    <link rel="stylesheet" href="../../Content/Home.css" />   
 }
 
 <!-- Welcome section -->
@@ -16,8 +16,8 @@
         </ul>
 
         <div class="greeting">
-            <h1 style="color: black">Welcome to K2L <br /> Food Court System</h1>
-            <a class="btn btn-warning order-btn" href="@Url.Action("Index","Menu", routeValues: null)">Đặt món ngay</a>
+            <h1 style="color: white; font-weight: bold;">Welcome to K2L <br /> Food Court System</h1>
+            <a class="btn btn-warning order-btn" style="font-size: 2rem; padding-top: 1.5rem; font-weight: bold;" href="@Url.Action("Index","Menu", routeValues: null)">Đặt món ngay</a>
         </div>
     </div>
 

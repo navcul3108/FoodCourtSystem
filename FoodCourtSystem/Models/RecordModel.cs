@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace FoodCourtSystem.Models
         public ProductModel Product { get; set; }
         public int Quantity { get; set; }
         public int Revenue { get; set; }
-        public RecordModel record;
+        public RecordModel Record;
     }
     public class RecordModel
     { 
@@ -23,7 +24,9 @@ namespace FoodCourtSystem.Models
         public string ID { get; set; }
         public VendorModel Vendor { get; set; }
         public virtual ICollection<RecordItemModel> Items { get; set; }
+        [DisplayName("Doanh thu")]
         public int TotalRevenue { get; set; }
+        [DisplayName("Thời gian")]
         [DataType(DataType.DateTime)]
         public DateTime CreatedDay { get; set; }
     }

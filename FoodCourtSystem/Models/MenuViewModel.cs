@@ -34,11 +34,6 @@ namespace FoodCourtSystem.Models
         public string Name { get; set; }
 
     }
-
-    public class MenuViewModel
-    {
-        public virtual ICollection<CategoryModel> Categories { get; set; }
-    }
     
 
 }

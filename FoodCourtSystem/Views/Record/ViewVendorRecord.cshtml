@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FoodCourtSystem.Models.RecordModel>
+
+@{
+    ViewBag.Title = "ViewVendorRecord";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Báo cáo doanh thu của quầy @ViewBag.VendorName</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalRevenue)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedDay)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalRevenue)
+    </td>
+    <td>
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+    </td>
+</tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Trở về", "")
+</div>

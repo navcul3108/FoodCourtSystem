@@ -20,9 +20,10 @@ namespace FoodCourtSystem.Controllers
         MenuContext menuContext = new MenuContext();
         //OrderContext orderContext = new OrderContext();
         // GET: Cart
-        public ActionResult ShoppingCart(string OwnerName)
+        public ActionResult ShoppingCart()
         {
-            CartModel model = menuContext.Carts.SingleOrDefault(item => item.OwnerName==OwnerName);
+            string OwnerName = this.HttpContext.User.Identity.Name;
+            CartModel model = menuContext.Carts.Where(item => item.OwnerName==OwnerName).FirstOrDefault();
             if (model != null)
             {
                 foreach (var cartItem in model.Items)
@@ -43,7 +44,7 @@ namespace FoodCourtSystem.Controllers
                 
                 HttpContextBase context = this.HttpContext;
 
-                var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+                var cart = menuContext.Carts.Where(c => c.OwnerName == context.User.Identity.Name).FirstOrDefault();
                 if (cart == null)
                 {
                     cart = new CartModel()
@@ -99,35 +100,37 @@ namespace FoodCourtSystem.Controllers
         }
 
 
-        public ActionResult RemoveFromCart(string cartItemId)
+        public ActionResult RemoveFromCart(string cartItemID)
         {
             HttpContextBase context = this.HttpContext;
-            var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+            var cart = menuContext.Carts.Where(c => c.OwnerName == context.User.Identity.Name).First();
             if (cart == null)
             {
                 return View("Error");
             }
             else
             {
-                var cartitem = cart.Items.SingleOrDefault(ci => ci.ID == cartItemId);
+                var cartitem = menuContext.CartItems.Where(ci => ci.ID == cartItemID).FirstOrDefault();
                 if (cartitem == null)
                 {
                     return View("Error");
                 }
                 else
-                {
-                    cart.TotalMoney -= cartitem.TotalMoney;
+                { 
                     cart.Items.Remove(cartitem);
+                    cart.UpdateTotalMoney();
+                    menuContext.Carts.AddOrUpdate(cart);
+                    menuContext.CartItems.Remove(cartitem);
+                    menuContext.SaveChanges();
+                    return RedirectToAction("ShoppingCart", "Cart");
                 }
             }
-            menuContext.SaveChanges();
-            return new EmptyResult();
         }
 
         public ActionResult MakePayment(int totalPrice)
         {
             HttpContextBase context = this.HttpContext;
-            var cart = menuContext.Carts.SingleOrDefault(c => c.OwnerName == context.User.Identity.Name);
+            var cart = menuContext.Carts.Where(c => c.OwnerName == context.User.Identity.Name).FirstOrDefault();
             var deletedCartItems = menuContext.CartItems.Where(ci => ci.CartID == cart.ID);
             menuContext.CartItems.RemoveRange(deletedCartItems);
             menuContext.Carts.Remove(cart);
